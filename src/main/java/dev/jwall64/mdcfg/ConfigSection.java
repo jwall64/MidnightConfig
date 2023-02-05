@@ -1,6 +1,7 @@
 package dev.jwall64.mdcfg;
 
 import dev.jwall64.mdcfg.serializer.ConfigContext;
+import dev.jwall64.mdcfg.serializer.SerializeContext;
 import dev.jwall64.mdcfg.serializer.SerializeResult;
 import dev.jwall64.mdcfg.serializer.Serializer;
 
@@ -326,4 +327,18 @@ public class ConfigSection implements ConfigObject {
 
         return sec;
     }
+
+    public static final Serializer<ConfigSection> SERIALIZER = new Serializer<>() {
+        @Override
+        public <O> SerializeResult<O> serialize(SerializeContext<O> context, ConfigSection value) {
+            return SerializeResult.ofNullable(ConfigContext.INSTANCE.convert(context, value), "Could not convert " + value + " to ConfigObject!");
+        }
+        @Override
+        public <O> SerializeResult<ConfigSection> deserialize(SerializeContext<O> context, O value) {
+            return SerializeResult.ofNullable(context.convert(ConfigContext.INSTANCE, value), "Could not read " + value + " as ConfigObject!").map(obj -> {
+                if(!obj.isSection()) return SerializeResult.failure(value + " is not a ConfigSection!");
+                return SerializeResult.success(obj.asSection());
+            });
+        }
+    };
 }

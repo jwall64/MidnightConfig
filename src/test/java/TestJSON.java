@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import dev.jwall64.mdcfg.ConfigList;
 import dev.jwall64.mdcfg.ConfigObject;
 import dev.jwall64.mdcfg.ConfigSection;
+import dev.jwall64.mdcfg.codec.DecodeException;
 import dev.jwall64.mdcfg.codec.JSONCodec;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
 
@@ -93,6 +94,25 @@ public class TestJSON {
             Assertions.fail();
             ex.printStackTrace();
         }
+    }
+
+    @Test
+    public void testReadEmpty() {
+
+        File f = new File("empty.json");
+
+        try(FileInputStream fis = new FileInputStream(f)) {
+
+            JSONCodec codec = new JSONCodec();
+            codec.decode(ConfigContext.INSTANCE, fis, StandardCharsets.UTF_8);
+
+        } catch (IOException ex) {
+            Assertions.fail();
+            ex.printStackTrace();
+        } catch (DecodeException ex) {
+            // Ignore: This is expected
+        }
+
     }
 
     @Test
