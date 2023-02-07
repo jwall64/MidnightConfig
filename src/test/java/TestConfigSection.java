@@ -4,8 +4,12 @@ import dev.jwall64.mdcfg.ConfigList;
 import dev.jwall64.mdcfg.ConfigObject;
 import dev.jwall64.mdcfg.ConfigPrimitive;
 import dev.jwall64.mdcfg.ConfigSection;
+import dev.jwall64.mdcfg.serializer.NumberSerializer;
 import dev.jwall64.mdcfg.serializer.ObjectSerializer;
 import dev.jwall64.mdcfg.serializer.Serializer;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class TestConfigSection {
 
@@ -120,6 +124,31 @@ public class TestConfigSection {
         Assertions.assertNotEquals(sec1, copy);
         Assertions.assertEquals(5, sec1.size());
         Assertions.assertEquals(6, copy.size());
+
+    }
+
+    @Test
+    public void testListFiltering() {
+
+        ConfigSection section = new ConfigSection()
+                .with("list", new ConfigList()
+                        .append(1)
+                        .append(4)
+                        .append(-1));
+
+        Serializer<Integer> ser = NumberSerializer.forInt(0, 100);
+        List<Integer> is = section.getListFiltered("list", ser);
+
+        Assertions.assertEquals(2, is.size());
+        Assertions.assertEquals(1, is.get(0));
+        Assertions.assertEquals(4, is.get(1));
+
+        AtomicInteger errors = new AtomicInteger();
+        is = section.getListFiltered("list", ser, error -> errors.getAndIncrement());
+        Assertions.assertEquals(2, is.size());
+        Assertions.assertEquals(1, is.get(0));
+        Assertions.assertEquals(4, is.get(1));
+        Assertions.assertEquals(1, errors.get());
 
     }
 
