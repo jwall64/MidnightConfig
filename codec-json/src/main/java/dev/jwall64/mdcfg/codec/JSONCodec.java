@@ -1,8 +1,6 @@
 package dev.jwall64.mdcfg.codec;
 
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import dev.jwall64.mdcfg.ConfigObject;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
 import dev.jwall64.mdcfg.serializer.SerializeContext;
@@ -16,8 +14,6 @@ import java.util.*;
  * A {@link Codec Codec} for JSON data
  */
 public class JSONCodec implements Codec {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger("JSONCodec");
 
     private final boolean shouldIndent;
     private final String indent;
