@@ -8,7 +8,7 @@ repositories {
 
 dependencies {
 
-    compileOnly(libs.jetbrains.annotations)
+    compileOnlyApi(libs.jetbrains.annotations)
     implementation(libs.slf4j.api)
 
     testImplementation(platform(libs.junit.bom))

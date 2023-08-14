@@ -7,12 +7,6 @@ import dev.jwall64.mdcfg.codec.DecodeException;
 import dev.jwall64.mdcfg.codec.JSONCodec;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-
 public class TestJSON {
 
     @Test
