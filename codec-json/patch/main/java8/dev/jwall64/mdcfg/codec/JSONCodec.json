@@ -1,0 +1,10 @@
+[
+  {
+    "lines": [
+      { "find":  "\" \".repeat(indentAmount);"}
+    ],
+    "type": "replace",
+    "find": "\" \".repeat(indentAmount);",
+    "replace": "dev.jwall64.mdcfg.util.Java8StringUtil.repeat(\" \", indentAmount);"
+  }
+]
