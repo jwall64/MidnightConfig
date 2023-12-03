@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import dev.jwall64.mdcfg.ConfigList;
+import dev.jwall64.mdcfg.ConfigObject;
 import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.mdcfg.codec.BinaryCodec;
 import dev.jwall64.mdcfg.codec.FileCodec;
@@ -69,6 +70,16 @@ public class TestBinary {
         File file2 = new File("test_large_zip.mdb");
         File file3 = new File("test_large_uncompressed.mdb");
 
+        if(file.exists() && !file.delete()) {
+            Assertions.fail("Unable to delete test files!");
+        }
+        if(file2.exists() && !file2.delete()) {
+            Assertions.fail("Unable to delete test files!");
+        }
+        if(file3.exists() && !file3.delete()) {
+            Assertions.fail("Unable to delete test files!");
+        }
+
         try {
             codec.saveToFile(ConfigContext.INSTANCE, section, file, StandardCharsets.UTF_8);
             codec2.saveToFile(ConfigContext.INSTANCE, section, file2, StandardCharsets.UTF_8);
@@ -84,5 +95,22 @@ public class TestBinary {
             Assertions.fail();
         }
 
+        // Read back the data
+        try {
+            ConfigObject read = codec.loadFromFile(ConfigContext.INSTANCE, file, StandardCharsets.UTF_8);
+            Assertions.assertTrue(read.isSection());
+            Assertions.assertEquals(read, section);
+
+            read = codec2.loadFromFile(ConfigContext.INSTANCE, file2, StandardCharsets.UTF_8);
+            Assertions.assertTrue(read.isSection());
+            Assertions.assertEquals(read, section);
+
+            read = codec3.loadFromFile(ConfigContext.INSTANCE, file3, StandardCharsets.UTF_8);
+            Assertions.assertTrue(read.isSection());
+            Assertions.assertEquals(read, section);
+
+        } catch (Exception ex) {
+            Assertions.fail("An exception occurred while reading binary data!", ex);
+        }
     }
 }
