@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * A {@link dev.jwall64.mdcfg.serializer.SerializeContext SerializeContext} for serializing to or deserialize from
+ * A {@link dev.jwall64.mdcfg.serializer.SerializeContext SerializeContext} for serializing to or deserializing from
  * GSON objects
  */
 public class GsonContext implements SerializeContext<JsonElement> {
