@@ -1,7 +1,7 @@
 plugins {
     id("midnightcfg-build")
-    id("dev.jwall64.gradle-multi-version") version "0.2.1-SNAPSHOT"
-    id("dev.jwall64.gradle-patch") version "0.1.1-SNAPSHOT"
+    id("dev.jwall64.gradle-multi-version") version "0.2.1"
+    id("dev.jwall64.gradle-patch") version "0.2.0"
 }
 
 multiVersion {
