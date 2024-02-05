@@ -2,8 +2,12 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import dev.jwall64.mdcfg.ConfigObject;
+import dev.jwall64.mdcfg.ConfigPrimitive;
+import dev.jwall64.mdcfg.codec.DecodeException;
+import dev.jwall64.mdcfg.codec.EncodeException;
 import dev.jwall64.mdcfg.codec.NBTCodec;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
+import dev.jwall64.mdcfg.serializer.Serializer;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -65,6 +69,31 @@ public class TestNBT {
         }
 
         Assertions.assertEquals(decoded, reDecoded);
+
+    }
+
+    @Test
+    public void testBooleans() {
+
+        NBTCodec codec = new NBTCodec(false);
+
+        byte[] value;
+        try(ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            codec.encode(ConfigContext.INSTANCE, new ConfigPrimitive(true), bos);
+            value = bos.toByteArray();
+        } catch (IOException | EncodeException ex) {
+            Assertions.fail("An exception occurred while encoding a boolean!");
+            return;
+        }
+
+        try(ByteArrayInputStream bis = new ByteArrayInputStream(value)) {
+
+            boolean bl = codec.decode(ConfigContext.INSTANCE, Serializer.BOOLEAN, bis).getOrThrow();
+            Assertions.assertTrue(bl);
+
+        } catch(IOException | DecodeException ex) {
+            Assertions.fail("An exception occurred while decoding boolean!");
+        }
 
     }
 
