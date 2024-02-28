@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import dev.jwall64.mdcfg.*;
+import dev.jwall64.mdcfg.ConfigObject;
+import dev.jwall64.mdcfg.ConfigPrimitive;
+import dev.jwall64.mdcfg.ConfigSection;
+import dev.jwall64.mdcfg.Tuples;
 import dev.jwall64.mdcfg.serializer.*;
 
 import java.util.*;

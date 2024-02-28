@@ -5,8 +5,8 @@ import dev.jwall64.mdcfg.ConfigList;
 import dev.jwall64.mdcfg.ConfigObject;
 import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.mdcfg.codec.DecodeException;
-import dev.jwall64.mdcfg.serializer.ConfigContext;
 import dev.jwall64.mdcfg.codec.GsonCodec;
+import dev.jwall64.mdcfg.serializer.ConfigContext;
 import dev.jwall64.mdcfg.serializer.GsonContext;
 
 public class TestGson {

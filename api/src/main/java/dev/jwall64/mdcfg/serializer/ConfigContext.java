@@ -1,8 +1,13 @@
 package dev.jwall64.mdcfg.serializer;
 
-import dev.jwall64.mdcfg.*;
+import dev.jwall64.mdcfg.ConfigList;
+import dev.jwall64.mdcfg.ConfigObject;
+import dev.jwall64.mdcfg.ConfigPrimitive;
+import dev.jwall64.mdcfg.ConfigSection;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**

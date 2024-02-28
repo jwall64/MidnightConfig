@@ -1,6 +1,9 @@
 package dev.jwall64.mdcfg.codec;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSyntaxException;
 import org.jetbrains.annotations.NotNull;
 import dev.jwall64.mdcfg.serializer.GsonContext;
 import dev.jwall64.mdcfg.serializer.SerializeContext;

@@ -2,8 +2,8 @@ package dev.jwall64.mdcfg;
 
 import org.jetbrains.annotations.NotNull;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
-import dev.jwall64.mdcfg.serializer.Serializer;
 import dev.jwall64.mdcfg.serializer.SerializeException;
+import dev.jwall64.mdcfg.serializer.Serializer;
 
 import java.util.ArrayList;
 import java.util.Collection;
