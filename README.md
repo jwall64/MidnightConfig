@@ -4,6 +4,21 @@ A general-purpose configuration and serialization library for Java
 
 <br>
 
+## Obtaining
+
+MidnightConfig can be obtained via \[JitPack\]\(https://jitpack\.io/\)
+
+Example `build.gradle.kts` buildscript configuration:
+```kotlin
+repositories {
+}
+dependencies {
+    implementation("dev.jwall64.MidnightConfig:api:2.2.0")
+    implementation("dev.jwall64.MidnightConfig:codec-json:2.2.0")
+}
+```
+
+
 ## Basic Usage
 
 MidnightConfig offers an easy way to load and manage configuration files. The most important types included
