@@ -8,10 +8,6 @@ application {
     mainClass = "dev.jwall64.mdcfg.tool.Main"
 }
 
-repositories {
-    mavenCentral()
-}
-
 java {
     manifest {
         attributes(Pair("Main-Class", application.mainClass))

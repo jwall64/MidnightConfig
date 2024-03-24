@@ -3,7 +3,6 @@ rootProject.name = "midnightcfg"
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        mavenLocal()
     }
 
     includeBuild("gradle/plugins")
@@ -11,9 +10,9 @@ pluginManagement {
 
 include("api")
 
+include("codec-nbt")
 include("codec-json")
 include("codec-gson")
 include("codec-binary")
-include("codec-nbt")
 
 include("cfgtool")
