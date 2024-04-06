@@ -1,7 +1,9 @@
 package dev.jwall64.mdcfg.sql;
 
 import org.jetbrains.annotations.Nullable;
+import dev.jwall64.mdcfg.ConfigObject;
 import dev.jwall64.mdcfg.ConfigSection;
+import dev.jwall64.mdcfg.serializer.ConfigContext;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -103,7 +105,8 @@ public class SQLConnection implements AutoCloseable {
             while(set.next()) {
                 ConfigSection row = new ConfigSection();
                 for (String key : schema.getColumnNames()) {
-                    row.set(key, schema.getType(key).read(set, key));
+                    SQLDataValue<ConfigObject> obj = schema.getType(key).read(ConfigContext.INSTANCE, set, key);
+                    row.set(key, obj.getValue());
                 }
                 out.add(row);
             }
