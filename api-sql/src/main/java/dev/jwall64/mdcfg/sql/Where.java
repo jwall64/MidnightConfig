@@ -1,5 +1,6 @@
 package dev.jwall64.mdcfg.sql;
 
+import dev.jwall64.mdcfg.ConfigObject;
 import dev.jwall64.mdcfg.ConfigPrimitive;
 
 import java.util.stream.Collectors;
@@ -28,9 +29,9 @@ public class Where {
     }
 
 
-    public static Where equals(String key, ConfigPrimitive value) {
+    public static Where equals(String key, ConfigObject value) {
         if(!SQLUtil.VALID_NAME.matcher(key).matches()) throw new IllegalArgumentException("Invalid column name: " + key);
-        return new Where(new StringBuilder(key).append(" = ").append(SQLUtil.encodePrimitive(value)));
+        return new Where(new StringBuilder(key).append(" = ").append(value)); // TODO: Move to SQLDialect
     }
 
     public static Where greaterThan(String key, Number value) {
@@ -65,7 +66,9 @@ public class Where {
 
     public static Where in(String key, Stream<ConfigPrimitive> values) {
         if(!SQLUtil.VALID_NAME.matcher(key).matches()) throw new IllegalArgumentException("Invalid column name: " + key);
-        return new Where(new StringBuilder(key).append(" IN (").append(values.map(SQLUtil::encodePrimitive).collect(Collectors.joining(","))).append(")"));
+        return new Where(new StringBuilder(key).append(" IN (").append(values
+                .map(Object::toString) // TODO: Move to SQLDialect
+                .collect(Collectors.joining(","))).append(")"));
     }
 
 }

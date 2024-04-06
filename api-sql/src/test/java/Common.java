@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.mdcfg.sql.ColumnType;
-import dev.jwall64.mdcfg.sql.DatabaseType;
 import dev.jwall64.mdcfg.sql.SQLConnection;
 import dev.jwall64.mdcfg.sql.TableSchema;
 
@@ -15,7 +14,7 @@ public class Common {
                 .withColumn("name", ColumnType.TINYTEXT)
                 .build();
 
-        if(conn.getTables().contains("test")) {
+        if(conn.hasTable("test")) {
             conn.dropTable("test");
         }
 
