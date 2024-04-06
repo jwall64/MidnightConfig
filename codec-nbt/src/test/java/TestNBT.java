@@ -6,6 +6,7 @@ import dev.jwall64.mdcfg.ConfigPrimitive;
 import dev.jwall64.mdcfg.codec.DecodeException;
 import dev.jwall64.mdcfg.codec.EncodeException;
 import dev.jwall64.mdcfg.codec.NBTCodec;
+import dev.jwall64.mdcfg.codec.NBTUtil;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
 import dev.jwall64.mdcfg.serializer.Serializer;
 

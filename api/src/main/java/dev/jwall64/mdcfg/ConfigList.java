@@ -2,6 +2,7 @@ package dev.jwall64.mdcfg;
 
 import org.jetbrains.annotations.NotNull;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
+import dev.jwall64.mdcfg.serializer.SerializeContext;
 import dev.jwall64.mdcfg.serializer.SerializeException;
 import dev.jwall64.mdcfg.serializer.Serializer;
 
@@ -18,12 +19,15 @@ public class ConfigList extends ConfigObject {
     /**
      * Creates an empty ConfigList
      */
-    public ConfigList() { }
+    public ConfigList() {
+        super(SerializeContext.Type.LIST);
+    }
 
     /**
      * Creates a ConfigList using the given values
      */
     public ConfigList(Collection<ConfigObject> collection) {
+        super(SerializeContext.Type.LIST);
         values.addAll(collection);
     }
 

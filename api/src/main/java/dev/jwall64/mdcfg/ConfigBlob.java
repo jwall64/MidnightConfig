@@ -1,26 +1,29 @@
 package dev.jwall64.mdcfg;
 
-import java.io.ByteArrayInputStream;
+import dev.jwall64.mdcfg.serializer.SerializeContext;
+
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 
 public class ConfigBlob extends ConfigObject {
 
     private final ByteBuffer data;
-    public ConfigBlob(byte[] data) {
-        this.data = ByteBuffer.wrap(data);
-    }
 
     public ConfigBlob(ByteBuffer buffer) {
+        super(SerializeContext.Type.BLOB);
         this.data = buffer;
     }
 
+    public ConfigBlob(byte[] data) {
+        this(ByteBuffer.wrap(data));
+    }
+
     public ConfigBlob(ByteArrayOutputStream stream) {
-        this.data = ByteBuffer.wrap(stream.toByteArray());
+        this(stream.toByteArray());
     }
 
     public int getSize() {
-        return data.capacity();
+        return data.position();
     }
 
     public ByteBuffer getData() {
