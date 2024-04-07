@@ -6,8 +6,6 @@ import dev.jwall64.mdcfg.ConfigPrimitive;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
 import dev.jwall64.mdcfg.serializer.SerializeContext;
 
-import java.nio.ByteBuffer;
-
 public class SQLDataValue<T> {
 
     private final Writer writer;
