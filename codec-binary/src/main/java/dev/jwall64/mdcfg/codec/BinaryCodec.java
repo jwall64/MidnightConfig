@@ -1,6 +1,7 @@
 package dev.jwall64.mdcfg.codec;
 
 import org.jetbrains.annotations.NotNull;
+import dev.jwall64.mdcfg.ByteBufferInputStream;
 import dev.jwall64.mdcfg.ConfigPrimitive;
 import dev.jwall64.mdcfg.serializer.SerializeContext;
 
@@ -81,8 +82,18 @@ public class BinaryCodec implements Codec {
             case BLOB:
                 ByteBuffer buffer = context.asBlob(input);
                 dos.writeByte(Type.BLOB.index());
-                dos.write(buffer.capacity());
-                dos.write(buffer.array());
+                dos.write(buffer.limit());
+
+                try(InputStream is = new ByteBufferInputStream(buffer)) {
+                    byte[] copyBuffer = new byte[1024];
+                    int read;
+                    while ((read = is.read(copyBuffer)) > 0) {
+                        dos.write(copyBuffer, 0, read);
+                    }
+                } catch (IOException ex) {
+                    throw new EncodeException("An IOException occurred while writing a blob!", ex);
+                }
+
                 break;
 
             case LIST:
