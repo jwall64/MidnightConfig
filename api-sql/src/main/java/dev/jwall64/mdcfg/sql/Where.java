@@ -2,6 +2,8 @@ package dev.jwall64.mdcfg.sql;
 
 import dev.jwall64.mdcfg.Tuples;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -34,8 +36,14 @@ public class Where {
         return arguments.get(value);
     }
 
-    public String writeArgument(int value) {
-        return getArgument(value).write();
+    public void writeArguments(PreparedStatement stmt, int startIndex) throws SQLException {
+
+        for(SQLDataValue<?> dv : arguments) {
+            dv.write(stmt, startIndex++);
+        }
+        for(Tuples.T2<Conjunction, Where> t : children) {
+            t.p2.writeArguments(stmt, startIndex);
+        }
     }
 
     public int getArgumentCount() {
