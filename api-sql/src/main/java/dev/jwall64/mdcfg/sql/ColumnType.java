@@ -1,16 +1,33 @@
 package dev.jwall64.mdcfg.sql;
 
-import dev.jwall64.mdcfg.ConfigBlob;
-import dev.jwall64.mdcfg.serializer.ConfigContext;
-import dev.jwall64.mdcfg.serializer.SerializeContext;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
-import java.io.IOException;
-import java.sql.Blob;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+public class ColumnType<T> {
 
-public class ColumnType {
+    private final DataType<T> dataType;
+    private final String parameter;
 
+    public ColumnType(DataType<T> dataType, Object... parameter) {
+        this.dataType = dataType;
+        this.parameter = Arrays.stream(parameter).map(Object::toString).collect(Collectors.joining(","));
+    }
+
+    public ColumnType(DataType<T> dataType) {
+        this.dataType = dataType;
+        this.parameter = null;
+    }
+
+    public String getEncoded() {
+        StringBuilder builder = new StringBuilder(dataType.getName());
+        if(parameter != null) {
+            builder.append('(').append(parameter).append(')');
+        }
+        return builder.toString();
+    }
+
+
+    /*
     private final String encoded; // i.e. VARCHAR(256)
     private final Reader reader;
     private final SQLDataValue.Writer writer;
@@ -174,7 +191,7 @@ public class ColumnType {
             }
         };
 
-    }
+    }*/
 
 
 }
