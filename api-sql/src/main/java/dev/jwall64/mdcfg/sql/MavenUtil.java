@@ -1,7 +1,6 @@
 package dev.jwall64.mdcfg.sql;
 
 import org.jetbrains.annotations.Nullable;
-import dev.jwall64.mdcfg.serializer.InlineSerializer;
 import dev.jwall64.mdcfg.serializer.SerializeContext;
 import dev.jwall64.mdcfg.serializer.SerializeResult;
 import dev.jwall64.mdcfg.serializer.Serializer;
@@ -17,7 +16,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.ParseException;
 import java.util.Stack;
 
 /**

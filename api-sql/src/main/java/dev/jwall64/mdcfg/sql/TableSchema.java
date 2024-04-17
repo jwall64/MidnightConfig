@@ -1,10 +1,11 @@
 package dev.jwall64.mdcfg.sql;
 
 import dev.jwall64.mdcfg.ConfigSection;
-import dev.jwall64.mdcfg.Tuples;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 public class TableSchema {
 

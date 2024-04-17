@@ -4,14 +4,15 @@ import dev.jwall64.mdcfg.ConfigObject;
 import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.mdcfg.Tuples;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
-import dev.jwall64.mdcfg.sql.*;
+import dev.jwall64.mdcfg.sql.Condition;
+import dev.jwall64.mdcfg.sql.DataValue;
+import dev.jwall64.mdcfg.sql.SQLConnection;
+import dev.jwall64.mdcfg.sql.SQLUtil;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Update extends DMLStatement {
 

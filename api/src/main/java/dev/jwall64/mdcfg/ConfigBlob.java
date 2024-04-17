@@ -2,7 +2,10 @@ package dev.jwall64.mdcfg;
 
 import dev.jwall64.mdcfg.serializer.SerializeContext;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.Objects;
 
