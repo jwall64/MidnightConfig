@@ -5,6 +5,6 @@
     ],
     "type": "replace",
     "find": "List.copyOf(",
-    "replace": "new ArrayList<>("
+    "replace": "dev.jwall64.mdcfg.util.Java8Util.copyList("
   }
 ]
