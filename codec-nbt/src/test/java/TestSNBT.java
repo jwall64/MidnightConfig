@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import dev.jwall64.mdcfg.ConfigList;
 import dev.jwall64.mdcfg.ConfigObject;
+import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.mdcfg.codec.*;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
 
@@ -72,6 +74,23 @@ public class TestSNBT {
 
         String dump = SNBTCodec.INSTANCE.encodeToString(ConfigContext.INSTANCE, obj);
         Assertions.assertEquals(snbt, dump);
+
+    }
+
+    @Test
+    public void testIndexed() {
+
+        ConfigSection sec = new ConfigSection()
+                .with("test", new ConfigList().append(10L).append(11L).append(13L));
+
+        SNBTCodec codec = new SNBTCodec(false, true);
+        String encoded = codec.encodeToString(ConfigContext.INSTANCE, sec);
+
+        System.out.println(encoded);
+
+        ConfigSection out = codec.decode(ConfigContext.INSTANCE, encoded).asSection();
+
+        Assertions.assertEquals(sec, out);
 
     }
 
