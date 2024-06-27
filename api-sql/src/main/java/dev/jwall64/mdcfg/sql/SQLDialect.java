@@ -2,8 +2,6 @@ package dev.jwall64.mdcfg.sql;
 
 import dev.jwall64.mdcfg.sql.stmt.StatementBuilder;
 
-import java.sql.Types;
-
 public interface SQLDialect {
 
     StatementBuilder writeTableSchema(SQLConnection connection, TableSchema schema);
