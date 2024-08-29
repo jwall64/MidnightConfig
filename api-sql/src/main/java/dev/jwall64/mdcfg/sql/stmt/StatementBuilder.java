@@ -1,6 +1,7 @@
 package dev.jwall64.mdcfg.sql.stmt;
 
 import dev.jwall64.mdcfg.sql.Condition;
+import dev.jwall64.mdcfg.sql.DataType;
 import dev.jwall64.mdcfg.sql.DataValue;
 import dev.jwall64.mdcfg.sql.SQLConnection;
 
@@ -55,6 +56,10 @@ public class StatementBuilder {
         return this;
     }
 
+    public StatementBuilder appendList(List<String> strings) {
+        return append(String.join(", ", strings));
+    }
+
     public StatementBuilder appendUnknown() {
         Entry ent = new Entry();
         ent.isUnknown = true;
@@ -70,6 +75,10 @@ public class StatementBuilder {
     public StatementBuilder appendCondition(Condition condition) {
         condition.encode(this);
         return this;
+    }
+
+    public boolean isEmpty() {
+        return entries.isEmpty();
     }
 
     private static class Entry {
