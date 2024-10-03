@@ -4,10 +4,7 @@ import dev.jwall64.mdcfg.ConfigObject;
 import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.mdcfg.Tuples;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
-import dev.jwall64.mdcfg.sql.Condition;
-import dev.jwall64.mdcfg.sql.DataValue;
-import dev.jwall64.mdcfg.sql.SQLConnection;
-import dev.jwall64.mdcfg.sql.SQLUtil;
+import dev.jwall64.mdcfg.sql.*;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -50,7 +47,7 @@ public class Update extends DMLStatement {
     }
 
     @Override
-    public int[] execute() {
+    public UpdateResult execute() {
 
         StatementBuilder query = new StatementBuilder("UPDATE ")
                 .append(table).append(" SET ");
@@ -80,7 +77,7 @@ public class Update extends DMLStatement {
                 DataValue.writeSerialized(ConfigContext.INSTANCE, s.p2, pst, index++);
             }
 
-            return new int[] { pst.executeUpdate() };
+            return new UpdateResult(new int[] { pst.executeUpdate() }, null);
 
         } catch (SQLException ex) {
             throw new IllegalArgumentException("Unable to add row to UPDATE statement!", ex);

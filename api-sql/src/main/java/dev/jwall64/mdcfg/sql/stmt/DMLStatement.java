@@ -1,6 +1,7 @@
 package dev.jwall64.mdcfg.sql.stmt;
 
 import dev.jwall64.mdcfg.sql.SQLConnection;
+import dev.jwall64.mdcfg.sql.UpdateResult;
 
 public abstract class DMLStatement extends Statement {
 
@@ -9,6 +10,6 @@ public abstract class DMLStatement extends Statement {
         super(connection);
     }
 
-    public abstract int[] execute();
+    public abstract UpdateResult execute();
 
 }
