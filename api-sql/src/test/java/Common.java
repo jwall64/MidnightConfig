@@ -4,13 +4,13 @@ import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.mdcfg.sql.*;
 import dev.jwall64.mdcfg.sql.stmt.Select;
 
-import java.io.File;
 import java.math.BigDecimal;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class Common {
 
-    private static final DriverRepository REPOSITORY = new DriverRepository.Maven(new File("drivers"));
+    private static final DriverRepository REPOSITORY = new DriverRepository.Maven(Paths.get("drivers"));
 
     public static DatabaseType getDBType(String name) {
 
