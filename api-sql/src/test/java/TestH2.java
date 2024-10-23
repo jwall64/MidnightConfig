@@ -2,9 +2,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
-import dev.jwall64.mdcfg.sql.DatabasePreset;
-import dev.jwall64.mdcfg.sql.PresetRegistry;
-import dev.jwall64.mdcfg.sql.SQLConnection;
+import dev.jwall64.mdcfg.serializer.ObjectSerializer;
+import dev.jwall64.mdcfg.serializer.Serializer;
+import dev.jwall64.mdcfg.sql.*;
 
 public class TestH2 {
 
@@ -43,5 +43,54 @@ public class TestH2 {
         } catch (Exception ex) {
             Assertions.fail(ex);
         }
+    }
+
+    private static class TableObject {
+        private final int id;
+        private final String name;
+
+        public TableObject(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public static final Serializer<TableObject> SERIALIZER = ObjectSerializer.create(
+                Serializer.INT.entry("id", to -> to.id),
+                Serializer.STRING.entry("name", to -> to.name),
+                TableObject::new
+        );
+    }
+
+    @Test
+    public void testWrongCase() {
+
+        SQLConnection conn = Common.getDBType("h2").create("h2/test");
+
+        TableSchema ts = TableSchema.builder()
+            .withColumn("id", DataType.INTEGER)
+            .withColumn("name", DataType.VARCHAR)
+            .build();
+
+        if(conn.hasTable("wrong_case")) {
+            conn.dropTable("wrong_case").execute();
+        }
+
+        conn.createTable("wrong_case", ts).execute();
+
+        conn.insert("wrong_case", ts).addRow(
+                TableObject.SERIALIZER.serialize(ConfigContext.INSTANCE, new TableObject(42, "Test")).getOrThrow().asSection()
+        ).execute();
+
+        ConfigSection row = conn.select("wrong_case").execute().get(0).toConfigSection();
+
+        Assertions.assertEquals(42, row.getInt("id"));
+        Assertions.assertEquals("Test", row.getString("name"));
+
+        TableObject obj = TableObject.SERIALIZER.deserialize(ConfigContext.INSTANCE, row).getOrThrow();
+
+        Assertions.assertEquals(42, obj.id);
+        Assertions.assertEquals("Test", obj.name);
+
+        conn.close();
     }
 }
