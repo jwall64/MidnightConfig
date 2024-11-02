@@ -4,6 +4,8 @@ import dev.jwall64.mdcfg.ByteBufferInputStream;
 import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.mdcfg.serializer.SerializeContext;
 import dev.jwall64.mdcfg.serializer.SerializeResult;
+import dev.jwall64.mdcfg.sql.stmt.Expression;
+import dev.jwall64.mdcfg.sql.stmt.StatementBuilder;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -14,7 +16,7 @@ import java.sql.SQLException;
  * Represents a data value for use in SQL statements and query results
  * @param <T> The type of value
  */
-public class DataValue<T> {
+public class DataValue<T> implements Expression {
 
     private final DataType<T> type;
     private final T value;
@@ -141,4 +143,8 @@ public class DataValue<T> {
         }
     }
 
+    @Override
+    public void write(StatementBuilder builder) {
+        builder.appendValue(this);
+    }
 }
