@@ -1,6 +1,7 @@
 package dev.jwall64.mdcfg.sql.stmt;
 
-import dev.jwall64.mdcfg.sql.*;
+import dev.jwall64.mdcfg.sql.QueryResult;
+import dev.jwall64.mdcfg.sql.SQLConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
