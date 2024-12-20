@@ -13,8 +13,8 @@ Example `build.gradle.kts` buildscript configuration:
 repositories {
 }
 dependencies {
-    implementation("dev.jwall64.MidnightConfig:api:2.5.1")
-    implementation("dev.jwall64.MidnightConfig:codec-json:2.5.1")
+    implementation("dev.jwall64.MidnightConfig:api:3.0.0")
+    implementation("dev.jwall64.MidnightConfig:codec-json:3.0.0")
 }
 ```
 
