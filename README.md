@@ -7,14 +7,13 @@ A general-purpose configuration and serialization library for Java
 ## Obtaining
 
 MidnightConfig can be obtained via \[JitPack\]\(https://jitpack\.io/\)
-
 Example `build.gradle.kts` buildscript configuration:
 ```kotlin
 repositories {
 }
 dependencies {
-    implementation("dev.jwall64.MidnightConfig:api:3.0.0")
-    implementation("dev.jwall64.MidnightConfig:codec-json:3.0.0")
+    implementation("dev.jwall64.MidnightConfig:api:3.0.1")
+    implementation("dev.jwall64.MidnightConfig:codec-json:3.0.1")
 }
 ```
 
