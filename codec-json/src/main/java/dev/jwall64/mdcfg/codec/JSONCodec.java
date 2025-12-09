@@ -1,6 +1,7 @@
 package dev.jwall64.mdcfg.codec;
 
 import org.jetbrains.annotations.NotNull;
+import dev.jwall64.mdcfg.ByteBufferInputStream;
 import dev.jwall64.mdcfg.ConfigObject;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
 import dev.jwall64.mdcfg.serializer.SerializeContext;
@@ -8,6 +9,7 @@ import dev.jwall64.mdcfg.serializer.SerializeResult;
 
 import java.io.*;
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.*;
 
@@ -230,12 +232,23 @@ public class JSONCodec implements Codec {
                 case BOOLEAN:
                     writer.write(context.asBoolean(value).getOrThrow(EncodeException::new).toString());
                     break;
-                case BLOB:
-                    String str = Base64.getEncoder().encode(context.asBlob(value).getOrThrow(EncodeException::new)).asCharBuffer().toString();
+                case BLOB: {
+
+                    ByteBuffer blob = context.asBlob(value).getOrThrow(EncodeException::new);
+                    byte[] bytes;
+                    if(blob.hasArray()) {
+                        bytes = blob.array();
+                    } else { 
+                        bytes = new byte[blob.remaining()];
+                        blob.get(bytes);                        
+                    }
+
+                    String str = Base64.getEncoder().encodeToString(bytes);
                     writer.write("\"");
                     writer.write(str);
                     writer.write("\"");
                     break;
+                }
                 case LIST:
                     encodeList(value, prefix, writer);
                     break;
