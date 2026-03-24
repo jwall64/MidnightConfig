@@ -15,5 +15,5 @@ dependencies {
     implementation("com.gradleup.shadow:shadow-gradle-plugin:9.2.2")
     implementation("dev.jwall64:gradle-multi-version:0.3.0")
     implementation("dev.jwall64:gradle-patch:0.2.0")
-    implementation("net.fabricmc:fabric-loom:1.13-SNAPSHOT")
+    implementation("net.fabricmc:fabric-loom:1.15-SNAPSHOT")
 }
