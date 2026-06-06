@@ -15,8 +15,8 @@ repositories {
     maven { url = uri("https://maven.jwall64.dev/plugins") }
 }
 dependencies {
-    implementation("dev.jwall64.MidnightConfig:api:3.5.3")
-    implementation("dev.jwall64.MidnightConfig:codec-json:3.5.3")
+    implementation("dev.jwall64.MidnightConfig:api:3.5.4")
+    implementation("dev.jwall64.MidnightConfig:codec-json:3.5.4")
 }
 ```
 
