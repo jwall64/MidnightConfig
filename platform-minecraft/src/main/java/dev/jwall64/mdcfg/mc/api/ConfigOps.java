@@ -76,6 +76,22 @@ public class ConfigOps implements DynamicOps<ConfigObject> {
     }
 
     @Override
+    public DataResult<Boolean> getBooleanValue(ConfigObject input) {
+        if(input.isBoolean()) {
+            return DataResult.success(input.asBoolean());
+        }
+        if(input.isNumber()) {
+            return DataResult.success(input.asNumber().doubleValue() != 0.0);
+        }
+        return DataResult.error(() -> "Not a boolean!");
+    }
+
+    @Override
+    public ConfigObject createBoolean(boolean b) {
+        return new ConfigPrimitive(b);
+    }
+
+    @Override
     public DataResult<String> getStringValue(ConfigObject input) {
         if(input.isString()) {
             return DataResult.success(input.asString());
