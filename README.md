@@ -6,7 +6,7 @@ A general-purpose configuration and serialization library for Java
 
 ## Obtaining
 
-MidnightConfig can be obtained via \[JitPack\]\(https://jitpack\.io/\)
+MidnightConfig can be obtained from the following maven repository: [https://maven.jwall64.dev/plugins](https://maven.jwall64.dev/plugins)
 
 Example `build.gradle.kts` buildscript configuration:
 
@@ -14,9 +14,10 @@ Example `build.gradle.kts` buildscript configuration:
 repositories {
     maven { url = uri("https://maven.jwall64.dev/plugins") }
 }
+
 dependencies {
-    implementation("dev.jwall64.MidnightConfig:api:3.5.4")
-    implementation("dev.jwall64.MidnightConfig:codec-json:3.5.4")
+    implementation("dev.jwall64:midnightcfg-api:3.5.6")
+    implementation("dev.jwall64:midnightcfg-codec-json:3.5.6")
 }
 ```
 
