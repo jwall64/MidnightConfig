@@ -14,10 +14,10 @@ Utils.setupResources(project, rootProject, "fabric.mod.json")
 
 dependencies {
 
-    val fabricApiVersion = "0.155.2+26.2"
+    val fabricApiVersion = "0.165.0+26.3"
 
-    minecraft("com.mojang:minecraft:26.2")
-    implementation("net.fabricmc:fabric-loader:0.19.3")
+    minecraft("com.mojang:minecraft:26.3")
+    implementation("net.fabricmc:fabric-loader:0.20.1")
 
     // Fabric API
     val apiModules = listOf(
